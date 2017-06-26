@@ -20,8 +20,10 @@ Step 6: $ psql -d news -f newsdata.sql
 
 Running the project:
 
-Step 7: $ python index.py
+Step 7: $ python databaseQueries.py
 
-Step 8: Open your browser and go to the localhost:8080/log_analysis
+Step 8: $ python index.py
 
-Step 9: Click the button to get the desired output
+Step 9: Open your browser and go to the localhost:8080/log_analysis
+
+Step 10: Click the button to get the desired output
