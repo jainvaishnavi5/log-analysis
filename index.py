@@ -25,7 +25,7 @@ class webServerHandler(BaseHTTPRequestHandler):
             </td>
             <td>
             &nbsp;
-            <td>
+            </td>
             <td>
             <form action="/top_articles">
             <button type="submit">
@@ -51,7 +51,7 @@ class webServerHandler(BaseHTTPRequestHandler):
             </button>
             </form>
             </td>
-            <tr>
+            </tr>
             <tr>
             <td colspan = '2'>
             <h3>
@@ -68,15 +68,17 @@ class webServerHandler(BaseHTTPRequestHandler):
             </button>
             </form>
             </td>
-            <tr>
+            </tr>
             </table>
             </html>'''
+
             if self.path.endswith("/log_analysis"):
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
                 self.end_headers()
                 self.wfile.write(output)
-            return
+                return
+
             if self.path.endswith("/top_articles?"):
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
@@ -100,7 +102,8 @@ class webServerHandler(BaseHTTPRequestHandler):
                 some_list += "</table>"
                 out = out % some_list
                 self.wfile.write(out)
-            return
+                return
+
             if self.path.endswith("/famous_authors?"):
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
@@ -127,7 +130,8 @@ class webServerHandler(BaseHTTPRequestHandler):
                 some_list += "</table>"
                 out = out % some_list
                 self.wfile.write(out)
-            return
+                return
+
             if self.path.endswith("/request_errors?"):
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
@@ -151,18 +155,22 @@ class webServerHandler(BaseHTTPRequestHandler):
                 some_list += "</table>"
                 out = out % some_list
                 self.wfile.write(out)
-            return
-        except IOError:
-                self.send_error(404, "File Not Found %s" % self.path)
+                return
 
-    def main():
-        try:
-            server = HTTPServer(('', 8080), webServerHandler)
-            print "Web server running... " +
-            "Open localhost:8080/log_analysis in your browser"
-            server.serve_forever()
-        except KeyboardInterrupt:
-            print "^C entered, stopping web server..."
-            server.socket.close()
-        if __name__ == '__main__':
+        except IOError:
+            self.send_error(404, "File Not Found %s" % self.path)
+
+
+def main():
+    try:
+        server = HTTPServer(('', 8080), webServerHandler)
+        print '''Web server running...
+        Open localhost:80080/log_analysis in your browser'''
+        server.serve_forever()
+
+    except KeyboardInterrupt:
+        print "^C entered, stopping web server..."
+        server.socket.close()
+
+if __name__ == '__main__':
             main()
