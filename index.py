@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import cgi
 import psycopg2
